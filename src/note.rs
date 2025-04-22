@@ -62,4 +62,20 @@ mod tests {
             now.format("%Y-%m-%d %H:%M").to_string()
         );
     }
+
+    #[test]
+    fn test_note_to_string() {
+        let now = Utc::now().naive_utc();
+        let note = Note::new_private("Test Title".to_string(), "Test Content".to_string(), now);
+
+        let expected_string = format!(
+            "Title: {}\nContent: {}\nDate Time: {}",
+            note.get_title(),
+            note.get_content(),
+            note.get_date_time()
+        );
+        let note_string = Note::to_string();
+
+        assert_eq!(note_string, expected_string);
+    }
 }
