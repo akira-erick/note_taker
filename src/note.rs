@@ -73,6 +73,13 @@ mod tests {
     }
 
     #[test]
+    #[should_panic(expected = "Title cannot be empty")]
+    fn test_should_panic_if_title_is_empty() {
+        let note = Note::new("".to_string(), "Test Content".to_string());
+        assert_eq!(note.get_title(), "");
+    }
+
+    #[test]
     fn test_note_to_string() {
         let now = Utc::now().naive_utc();
         let note = Note::new_private("Test Title".to_string(), "Test Content".to_string(), now);
