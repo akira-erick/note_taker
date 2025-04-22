@@ -7,4 +7,6 @@ fn main() {
         "2023-10-01 12:00".to_string(),
     );
     println!("Title: {}", note.get_title());
+    println!("Content: {}", note.get_content());
+    println!("Date and Time: {}", note.get_date_time());
 }
