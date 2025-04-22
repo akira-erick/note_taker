@@ -6,5 +6,5 @@ fn main() {
     println!("Content: {}", note.get_content());
     println!("Date Time: {}", note.get_date_time());
 
-    println!("Note Details:\n{}", note.string());
+    println!("\nNote Details:\n{}", note);
 }

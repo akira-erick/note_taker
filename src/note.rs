@@ -1,4 +1,5 @@
 use chrono::prelude::*;
+use std::fmt;
 
 pub struct Note {
     title: String,
@@ -30,9 +31,12 @@ impl Note {
     pub fn get_date_time(&self) -> String {
         self.date_time.format("%Y-%m-%d %H:%M").to_string()
     }
+}
 
-    pub fn string(&self) -> String {
-        format!(
+impl fmt::Display for Note {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(
+            f,
             "Title: {}\nContent: {}\nDate Time: {}",
             self.get_title(),
             self.get_content(),
@@ -79,7 +83,7 @@ mod tests {
             note.get_content(),
             note.get_date_time()
         );
-        let note_string = note.string();
+        let note_string = note.to_string();
 
         assert_eq!(note_string, expected_string);
     }
