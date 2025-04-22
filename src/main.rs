@@ -5,4 +5,6 @@ fn main() {
     println!("Title: {}", note.get_title());
     println!("Content: {}", note.get_content());
     println!("Date Time: {}", note.get_date_time());
+
+    println!("Note Details:\n{}", note.string());
 }
