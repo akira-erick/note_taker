@@ -102,4 +102,14 @@ mod tests {
 
         assert_eq!(note_string, expected_string);
     }
+
+    #[test]
+    fn test_notes_with_same_values_are_equal() {
+        let now = Utc::now().naive_utc();
+
+        let note1 = Note::new_private("Test Title".to_string(), "Test Content".to_string(), now);
+        let note2 = Note::new_private("Test Title".to_string(), "Test Content".to_string(), now);
+
+        assert_eq!(note1, note2);
+    }
 }
