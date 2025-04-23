@@ -1,11 +1,25 @@
-mod note;
+use crate::note::Note;
 
-struct NoteTaker {
+pub struct NoteTaker {
     notes: Vec<Note>,
 }
 
+impl NoteTaker {
+    pub fn new() -> Self {
+        NoteTaker { notes: Vec::new() }
+    }
+
+    pub fn add_note(&mut self, note: Note) {
+        self.notes.push(note);
+    }
+
+    pub fn get_notes(&self) -> Vec<Note> {
+        self.notes.clone()
+    }
+}
+
 #[cfg(test)]
-mod tests{
+mod tests {
     use super::*;
 
     #[test]
