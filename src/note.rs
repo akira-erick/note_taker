@@ -1,6 +1,7 @@
 use chrono::prelude::*;
 use std::fmt;
 
+#[derive(PartialEq, Eq, Hash, Debug, Clone)]
 pub struct Note {
     title: String,
     content: String,
