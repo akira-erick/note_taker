@@ -8,7 +8,15 @@ pub struct Note {
 }
 
 impl Note {
-    pub fn new(title: String, content: String) -> Self {
+    pub fn new(mut title: String, mut content: String) -> Self {
+        title = title.trim().to_string();
+
+        if title.is_empty() {
+            panic!("Title cannot be empty or blank");
+        }
+
+        content = content.trim().to_string();
+
         Note::new_private(title, content, Local::now().naive_local())
     }
 
@@ -73,9 +81,9 @@ mod tests {
     }
 
     #[test]
-    #[should_panic(expected = "Title cannot be empty")]
+    #[should_panic(expected = "Title cannot be empty or blank")]
     fn test_should_panic_if_title_is_empty() {
-        let note = Note::new("".to_string(), "Test Content".to_string());
+        let note = Note::new("   ".to_string(), "Test Content".to_string());
         assert_eq!(note.get_title(), "");
     }
 
