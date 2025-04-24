@@ -155,7 +155,7 @@ mod tests {
             now + chrono::Duration::hours(2),
         );
 
-        let mut notes = vec![note3.clone(), note1.clone(), note2.clone()];
+        let mut notes = [note3.clone(), note1.clone(), note2.clone()];
 
         notes.sort();
 
