@@ -139,4 +139,28 @@ mod tests {
 
         assert!(note1 < note2);
     }
+
+    #[test]
+    fn test_notes_in_vector_should_be_sorted_after_sort_function() {
+        let now = Utc::now().naive_utc();
+        let note1 = Note::new_private("Note 1".to_string(), "Content 1".to_string(), now);
+        let note2 = Note::new_private(
+            "Note 2".to_string(),
+            "Content 2".to_string(),
+            now + chrono::Duration::hours(1),
+        );
+        let note3 = Note::new_private(
+            "Note 3".to_string(),
+            "Content 3".to_string(),
+            now + chrono::Duration::hours(2),
+        );
+
+        let mut notes = vec![note3.clone(), note1.clone(), note2.clone()];
+
+        notes.sort();
+
+        assert_eq!(notes[0], note1);
+        assert_eq!(notes[1], note2);
+        assert_eq!(notes[2], note3);
+    }
 }
