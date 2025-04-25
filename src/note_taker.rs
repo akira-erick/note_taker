@@ -10,6 +10,9 @@ impl NoteTaker {
     }
 
     pub fn add_note(&mut self, note: Note) {
+        if self.notes.contains(&note) {
+            return;
+        }
         self.notes.push(note);
     }
 
