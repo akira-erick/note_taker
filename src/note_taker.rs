@@ -2,11 +2,15 @@ use crate::note::Note;
 
 pub struct NoteTaker {
     notes: Vec<Note>,
+    size: usize,
 }
 
 impl NoteTaker {
     pub fn new() -> Self {
-        NoteTaker { notes: Vec::new() }
+        NoteTaker {
+            notes: Vec::new(),
+            size: 0,
+        }
     }
 
     pub fn add_note(&mut self, note: Note) {
@@ -14,6 +18,7 @@ impl NoteTaker {
             return;
         }
         self.notes.push(note);
+        self.size += 1;
     }
 
     pub fn get_notes(&self) -> Vec<Note> {
@@ -72,5 +77,16 @@ mod tests {
 
         let note = note_taker.get_note(1);
         assert_eq!(note, note2);
+    }
+
+    #[test]
+    #[should_panic(expected = "index out of bounds")]
+    fn test_should_panic_if_getting_out_of_bounds_note() {
+        let mut note_taker = NoteTaker::new();
+        let note1 = Note::new("Title 1".to_string(), "Content 1".to_string());
+
+        note_taker.add_note(note1.clone());
+
+        let _ = note_taker.get_note(1); // This should panic
     }
 }
