@@ -28,10 +28,14 @@ impl NoteTaker {
     }
 
     pub fn get_note(&self, index: usize) -> Note {
-        if index >= self.size {
+        if index >= self.get_size() {
             panic!("Index out of bounds");
         }
         self.notes[index].clone()
+    }
+
+    pub fn get_size(&self) -> usize {
+        self.size
     }
 }
 
@@ -108,6 +112,7 @@ mod tests {
         assert_eq!(note_taker.get_note(1), note1);
     }
 
+    #[test]
     fn test_should_return_amount_of_notes() {
         let mut note_taker = NoteTaker::new();
         let note1 = Note::new("Title 1".to_string(), "Content 1".to_string());
