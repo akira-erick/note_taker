@@ -19,7 +19,7 @@ impl Note {
 
         content = content.trim().to_string();
 
-        Note::new_private(title, content, Local::now().naive_local())
+        Note::new_private(title, content, Note::get_rounded_date_time())
     }
 
     fn new_private(title: String, content: String, date_time: NaiveDateTime) -> Self {
@@ -40,6 +40,14 @@ impl Note {
 
     pub fn get_date_time(&self) -> String {
         self.date_time.format("%Y-%m-%d %H:%M").to_string()
+    }
+
+    fn get_rounded_date_time() -> NaiveDateTime {
+        let now = Local::now().naive_local();
+        NaiveDateTime::new(
+            now.date(),
+            NaiveTime::from_hms_opt(now.hour(), now.minute(), 0).unwrap(),
+        )
     }
 }
 
