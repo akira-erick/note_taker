@@ -60,6 +60,7 @@ impl Ord for Note {
         self.date_time
             .cmp(&other.date_time)
             .then_with(|| self.title.cmp(&other.title))
+            .then_with(|| self.content.cmp(&other.content))
     }
 }
 
