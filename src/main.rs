@@ -13,4 +13,6 @@ fn main() {
     for note in note_taker.get_notes() {
         println!("{}", note);
     }
+
+    println!("{}", note_taker.get_note(1));
 }

@@ -19,6 +19,10 @@ impl NoteTaker {
     pub fn get_notes(&self) -> Vec<Note> {
         self.notes.clone()
     }
+
+    pub fn get_note(&self, index: usize) -> Note {
+        self.notes[index].clone()
+    }
 }
 
 #[cfg(test)]
