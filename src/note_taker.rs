@@ -40,6 +40,12 @@ mod tests {
     }
 
     #[test]
+    fn test_should_return_empty_vector_when_no_notes() {
+        let note_taker = NoteTaker::new();
+        assert_eq!(note_taker.get_notes().len(), 0);
+    }
+
+    #[test]
     fn test_should_not_allow_duplicate_notes() {
         let mut note_taker = NoteTaker::new();
         let note1 = Note::new("Title 1".to_string(), "Content 1".to_string());
