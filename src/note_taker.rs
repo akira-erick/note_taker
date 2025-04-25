@@ -1,5 +1,6 @@
 use crate::note::Note;
 
+#[derive(Debug)]
 pub struct NoteTaker {
     notes: Vec<Note>,
     size: usize,
@@ -26,6 +27,9 @@ impl NoteTaker {
     }
 
     pub fn get_note(&self, index: usize) -> Note {
+        if index >= self.size {
+            panic!("Index out of bounds");
+        }
         self.notes[index].clone()
     }
 }
@@ -80,7 +84,7 @@ mod tests {
     }
 
     #[test]
-    #[should_panic(expected = "index out of bounds")]
+    #[should_panic(expected = "Index out of bounds")]
     fn test_should_panic_if_getting_out_of_bounds_note() {
         let mut note_taker = NoteTaker::new();
         let note1 = Note::new("Title 1".to_string(), "Content 1".to_string());
