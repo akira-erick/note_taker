@@ -170,7 +170,16 @@ mod tests {
     fn test_notes_with_same_date_time_should_be_ordered_by_title() {
         let now = Utc::now().naive_utc();
         let note1 = Note::new_private("Note A".to_string(), "Content 1".to_string(), now);
-        let note2 = Note::new_private("Note B".to_string(), "Content 2".to_string(), now);
+        let note2 = Note::new_private("Note B".to_string(), "Content 1".to_string(), now);
+
+        assert!(note1 < note2);
+    }
+
+    #[test]
+    fn test_notes_with_same_date_time_and_title_should_be_ordered_by_content() {
+        let now = Utc::now().naive_utc();
+        let note1 = Note::new_private("Note".to_string(), "Content A".to_string(), now);
+        let note2 = Note::new_private("Note".to_string(), "Content B".to_string(), now);
 
         assert!(note1 < note2);
     }
