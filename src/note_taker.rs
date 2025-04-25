@@ -15,10 +15,11 @@ impl NoteTaker {
     }
 
     pub fn add_note(&mut self, note: Note) {
-        if self.notes.contains(&note) {
+        if self.notes.binary_search(&note).is_ok() {
             return;
         }
-        self.notes.push(note);
+        let idx = self.notes.partition_point(|n| n < &note);
+        self.notes.insert(idx, note.clone());
         self.size += 1;
     }
 
