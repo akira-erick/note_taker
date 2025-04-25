@@ -163,4 +163,13 @@ mod tests {
         assert_eq!(notes[1], note2);
         assert_eq!(notes[2], note3);
     }
+
+    #[test]
+    fn test_notes_with_same_date_time_should_be_ordered_by_title() {
+        let now = Utc::now().naive_utc();
+        let note1 = Note::new_private("Note A".to_string(), "Content 1".to_string(), now);
+        let note2 = Note::new_private("Note B".to_string(), "Content 2".to_string(), now);
+
+        assert!(note1 < note2);
+    }
 }
