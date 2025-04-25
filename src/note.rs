@@ -57,7 +57,9 @@ impl fmt::Display for Note {
 
 impl Ord for Note {
     fn cmp(&self, other: &Self) -> Ordering {
-        self.date_time.cmp(&other.date_time)
+        self.date_time
+            .cmp(&other.date_time)
+            .then_with(|| self.title.cmp(&other.title))
     }
 }
 
