@@ -34,8 +34,14 @@ impl NoteTaker {
         self.notes[index].clone()
     }
 
-    pub fn get_by_title(&self, title: &str) -> Option<usize> {
-        self.notes.iter().position(|note| note.get_title() == title)
+    pub fn get_by_title(&self, title: &str) -> Vec<usize> {
+        let mut result = Vec::new();
+        for (i, note) in self.notes.iter().enumerate() {
+            if note.get_title() == title {
+                result.push(i);
+            }
+        }
+        result
     }
 
     pub fn get_size(&self) -> usize {
@@ -45,6 +51,7 @@ impl NoteTaker {
 
 #[cfg(test)]
 mod tests {
+
     use super::*;
 
     #[test]
@@ -139,8 +146,7 @@ mod tests {
 
         let result = note_taker.get_by_title("Title 1");
 
-        assert!(result.is_some());
-        assert_eq!(result.unwrap(), 0);
-        assert_eq!(note_taker.get_note(result.unwrap()), note1);
+        assert_eq!(result.len(), 1);
+        assert_eq!(note_taker.get_note(result[0]), note1);
     }
 }
