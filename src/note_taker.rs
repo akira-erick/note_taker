@@ -123,4 +123,20 @@ mod tests {
 
         assert_eq!(note_taker.get_size(), 2);
     }
+
+    #[test]
+    fn test_should_search_for_note_by_title() {
+        let mut note_taker = NoteTaker::new();
+        let note1 = Note::new("Title 1".to_string(), "Content 1".to_string());
+        let note2 = Note::new("Title 2".to_string(), "Content 2".to_string());
+
+        note_taker.add_note(note1.clone());
+        note_taker.add_note(note2.clone());
+
+        let result = note_taker.get_by_title("Title 1");
+
+        assert!(result.is_some());
+        assert_eq!(result.unwrap(), 0);
+        assert_eq!(note_taker.get_note(result.unwrap()), note1);
+    }
 }
