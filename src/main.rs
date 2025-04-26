@@ -14,5 +14,6 @@ fn main() {
         println!("{}", note);
     }
 
-    println!("{}", note_taker.get_note(1));
+    let note = note_taker.get_by_title("Title 1");
+    println!("{}", note_taker.get_note(note.unwrap()));
 }

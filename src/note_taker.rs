@@ -34,6 +34,10 @@ impl NoteTaker {
         self.notes[index].clone()
     }
 
+    pub fn get_by_title(&self, title: &str) -> Option<usize> {
+        self.notes.iter().position(|note| note.get_title() == title)
+    }
+
     pub fn get_size(&self) -> usize {
         self.size
     }
