@@ -44,6 +44,14 @@ impl NoteTaker {
         result
     }
 
+    pub fn delete_note(&mut self, index: usize) {
+        if index >= self.get_size() {
+            panic!("Index out of bounds");
+        }
+        self.notes.remove(index);
+        self.size -= 1;
+    }
+
     pub fn get_size(&self) -> usize {
         self.size
     }
