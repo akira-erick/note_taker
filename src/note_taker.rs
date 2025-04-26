@@ -163,4 +163,19 @@ mod tests {
 
         assert_eq!(result.len(), 0);
     }
+
+    #[test]
+    fn test_should_delete_note() {
+        let mut note_taker = NoteTaker::new();
+        let note1 = Note::new("Title 1".to_string(), "Content 1".to_string());
+        let note2 = Note::new("Title 2".to_string(), "Content 2".to_string());
+
+        note_taker.add_note(note1.clone());
+        note_taker.add_note(note2.clone());
+
+        note_taker.delete_note(0);
+
+        assert_eq!(note_taker.get_notes().len(), 1);
+        assert_eq!(note_taker.get_note(0), note2);
+    }
 }
