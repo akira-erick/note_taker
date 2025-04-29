@@ -42,6 +42,15 @@ impl Note {
         self.date_time.format("%Y-%m-%d %H:%M").to_string()
     }
 
+    pub fn get_as_json(&self) -> String {
+        format!(
+            r#"{{"title":"{}" ,"content":"{}", "date_time":"{}"}}"#,
+            self.get_title(),
+            self.get_content(),
+            self.get_date_time()
+        )
+    }
+
     fn get_rounded_date_time() -> NaiveDateTime {
         let now = Local::now().naive_local();
         NaiveDateTime::new(

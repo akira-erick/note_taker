@@ -17,4 +17,7 @@ fn main() {
     let note = note_taker.get_by_title("Title 1");
     println!("{}", note_taker.get_note(note[0]));
     note_taker.delete_note(0);
+
+    let note = note_taker.get_by_title("Title 2");
+    println!("{}", note_taker.get_note(note[0]).get_as_json());
 }
