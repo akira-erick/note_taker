@@ -198,7 +198,7 @@ mod tests {
         let note = Note::new_private("Test Title".to_string(), "Test Content".to_string(), now);
 
         let expected_json = format!(
-            r#"{{\n    "title":"{}",\n    "content":"{}",\n    "date_time":"{}"}}"#,
+            r#"{{"title":"{}" ,"content":"{}", "date_time":"{}"}}"#,
             note.get_title(),
             note.get_content(),
             note.get_date_time()
