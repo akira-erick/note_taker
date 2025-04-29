@@ -191,4 +191,19 @@ mod tests {
 
         assert!(note1 < note2);
     }
+
+    #[test]
+    fn test_notes_to_json() {
+        let now = Utc::now().naive_utc();
+        let note = Note::new_private("Test Title".to_string(), "Test Content".to_string(), now);
+
+        let expected_json = format!(
+            r#"{{\n    "title":"{}",\n    "content":"{}",\n    "date_time":"{}"}}"#,
+            note.get_title(),
+            note.get_content(),
+            note.get_date_time()
+        );
+
+        assert_eq!(note.get_as_json(), expected_json);
+    }
 }
