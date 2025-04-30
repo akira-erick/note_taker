@@ -1,5 +1,6 @@
 mod note;
 mod note_taker;
+mod persistence;
 
 fn main() {
     let mut note_taker = note_taker::NoteTaker::new();
