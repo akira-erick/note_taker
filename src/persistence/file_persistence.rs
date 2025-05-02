@@ -4,12 +4,12 @@ use crate::note::Note;
 use std::fs::File;
 use std::io::{BufRead, BufReader, BufWriter, Write};
 
+
 pub struct FilePersistence {
     file_path: String,
 }
 
 impl FilePersistence {
-    #[allow(dead_code)]
     pub fn new(file_path: String) -> Self {
         FilePersistence { file_path }
     }
@@ -54,7 +54,14 @@ impl PersistenceTrait for FilePersistence {
     }
 
     fn load(&self) -> Result<Vec<Note>, String> {
-        let file = File::open(&self.file_path).map_err(|e| e.to_string())?;
+        let file = match File::open(&self.file_path) {
+            Ok(file) => file,
+            Err(_) => {
+                // If the file doesn't exist or any error occurs, return an empty vector
+                return Ok(Vec::new());
+            }
+        };
+
         let reader = BufReader::new(file);
 
         let mut notes = Vec::new();
@@ -75,6 +82,9 @@ impl PersistenceTrait for FilePersistence {
         Ok(notes)
     }
 }
+
+#[cfg(test)]
+use std::fs::remove_file;
 
 #[cfg(test)]
 mod test {
@@ -99,5 +109,7 @@ mod test {
             assert_eq!(notes[i].get_content(), loaded_notes[i].get_content());
             assert_eq!(notes[i].get_date_time(), loaded_notes[i].get_date_time());
         }
+
+        remove_file("test_notes.json").unwrap(); // Clean up the test file
     }
 }
