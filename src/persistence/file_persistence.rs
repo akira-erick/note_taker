@@ -4,7 +4,6 @@ use crate::note::Note;
 use std::fs::File;
 use std::io::{BufRead, BufReader, BufWriter, Write};
 
-
 pub struct FilePersistence {
     file_path: String,
 }
