@@ -4,11 +4,14 @@ use crate::note::Note;
 use std::fs::File;
 use std::io::{BufRead, BufReader, BufWriter, Write};
 
+
 pub struct FilePersistence {
     file_path: String,
 }
 
 impl FilePersistence {
+    
+    #[allow(dead_code)]
     pub fn new(file_path: String) -> Self {
         FilePersistence { file_path }
     }
