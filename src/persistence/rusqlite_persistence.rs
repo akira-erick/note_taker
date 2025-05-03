@@ -63,3 +63,31 @@ impl PersistenceTrait for RusqlitePersistence {
         Ok(notes)
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::note::Note;
+
+    #[test]
+    fn test_rusqlite_persistence() {
+        let persistence = RusqlitePersistence::new("test.db").unwrap();
+        let note1 = Note::new("Test Title 1".to_string(), "Test Content 1".to_string());
+        let note2 = Note::new("Test Title 2".to_string(), "Test Content 2".to_string());
+
+        persistence.save(&[note1.clone(), note2.clone()]).unwrap();
+        let loaded_notes = persistence.load().unwrap();
+
+        assert_eq!(loaded_notes.len(), 2);
+        assert_eq!(loaded_notes[0].get_title(), "Test Title 1");
+        assert_eq!(loaded_notes[1].get_title(), "Test Title 2");
+
+        // Clean up the database after the test
+        persistence
+            .connection
+            .execute("DELETE FROM notes", params![])
+            .unwrap();
+        persistence.connection.close().unwrap();
+        std::fs::remove_file("test.db").unwrap();
+    }
+}
