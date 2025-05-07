@@ -48,11 +48,7 @@ impl PersistenceTrait for RusqlitePersistence {
             .unwrap();
         let note_iter = stmt
             .query_map(params![], |row| {
-                Ok(Note::new_with_date_time(
-                    row.get(0)?,
-                    row.get(1)?,
-                    row.get(2)?,
-                ))
+                Ok(Note::new_with_date_time(row.get(0)?, row.get(1)?, row.get(2)?).unwrap())
             })
             .unwrap();
 

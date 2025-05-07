@@ -19,14 +19,22 @@ impl Note {
 
         content = content.trim().to_string();
 
-        Ok(Note::new_private(title, content, Note::get_rounded_date_time()))
+        Ok(Note::new_private(
+            title,
+            content,
+            Note::get_rounded_date_time(),
+        ))
     }
 
-    pub fn new_with_date_time(mut title: String, mut content: String, date_time: String) -> Self {
+    pub fn new_with_date_time(
+        mut title: String,
+        mut content: String,
+        date_time: String,
+    ) -> Result<Note, String> {
         title = title.trim().to_string();
 
         if title.is_empty() {
-            panic!("Title cannot be empty or blank");
+            return Err("Title cannot be empty or blank".to_string());
         }
 
         content = content.trim().to_string();
@@ -34,7 +42,7 @@ impl Note {
         let date_time = NaiveDateTime::parse_from_str(&date_time, "%Y-%m-%d %H:%M")
             .expect("Failed to parse date time");
 
-        Note::new_private(title, content, date_time)
+        Ok(Note::new_private(title, content, date_time))
     }
 
     fn new_private(title: String, content: String, date_time: NaiveDateTime) -> Self {

@@ -33,7 +33,7 @@ impl FilePersistence {
         let title = json_value["title"].as_str().unwrap().to_string();
         let content = json_value["content"].as_str().unwrap().to_string();
         let date_time = json_value["date_time"].as_str().unwrap().to_string();
-        Note::new_with_date_time(title, content, date_time)
+        Note::new_with_date_time(title, content, date_time).unwrap()
     }
 }
 
