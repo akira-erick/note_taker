@@ -36,7 +36,7 @@ fn main() {
                     .read_line(&mut content)
                     .expect("Failed to read line");
 
-                note_taker.add_note(note::Note::new(title.to_string(), content.to_string()));
+                note_taker.add_note(note::Note::new(title.to_string(), content.to_string()).unwrap());
             }
             2 => {
                 let notes = note_taker.get_notes();

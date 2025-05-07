@@ -10,16 +10,16 @@ pub struct Note {
 }
 
 impl Note {
-    pub fn new(mut title: String, mut content: String) -> Self {
+    pub fn new(mut title: String, mut content: String) -> Result<Note, String> {
         title = title.trim().to_string();
 
         if title.is_empty() {
-            panic!("Title cannot be empty or blank");
+            return Err("Title cannot be empty or blank".to_string());
         }
 
         content = content.trim().to_string();
 
-        Note::new_private(title, content, Note::get_rounded_date_time())
+        Ok(Note::new_private(title, content, Note::get_rounded_date_time()))
     }
 
     pub fn new_with_date_time(mut title: String, mut content: String, date_time: String) -> Self {
@@ -108,13 +108,13 @@ mod tests {
 
     #[test]
     fn test_should_have_title() {
-        let note = Note::new("Test Title".to_string(), "Test Content".to_string());
+        let note = Note::new("Test Title".to_string(), "Test Content".to_string()).unwrap();
         assert_eq!(note.get_title(), "Test Title");
     }
 
     #[test]
     fn test_should_have_content() {
-        let note = Note::new("Test Title".to_string(), "Test Content".to_string());
+        let note = Note::new("Test Title".to_string(), "Test Content".to_string()).unwrap();
         assert_eq!(note.get_content(), "Test Content");
     }
 

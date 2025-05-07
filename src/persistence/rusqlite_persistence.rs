@@ -72,8 +72,8 @@ mod tests {
     #[test]
     fn test_rusqlite_persistence() {
         let persistence = RusqlitePersistence::new("test.db").unwrap();
-        let note1 = Note::new("Test Title 1".to_string(), "Test Content 1".to_string());
-        let note2 = Note::new("Test Title 2".to_string(), "Test Content 2".to_string());
+        let note1 = Note::new("Test Title 1".to_string(), "Test Content 1".to_string()).unwrap();
+        let note2 = Note::new("Test Title 2".to_string(), "Test Content 2".to_string()).unwrap();
 
         persistence.save(&[note1.clone(), note2.clone()]).unwrap();
         let loaded_notes = persistence.load().unwrap();

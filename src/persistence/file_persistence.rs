@@ -95,8 +95,8 @@ mod test {
         let file_path = "test_notes.json".to_string();
         let persistence = FilePersistence { file_path };
         let notes = vec![
-            Note::new("Test Title 1".to_string(), "Test Content 1".to_string()),
-            Note::new("Test Title 2".to_string(), "Test Content 2".to_string()),
+            Note::new("Test Title 1".to_string(), "Test Content 1".to_string()).unwrap(),
+            Note::new("Test Title 2".to_string(), "Test Content 2".to_string()).unwrap(),
         ];
 
         persistence.save(&notes).unwrap();

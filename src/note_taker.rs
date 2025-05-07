@@ -88,8 +88,8 @@ mod tests {
     #[test]
     fn test_should_store_notes() {
         let mut note_taker = setup_note_taker();
-        let note1 = Note::new("Title 1".to_string(), "Content 1".to_string());
-        let note2 = Note::new("Title 2".to_string(), "Content 2".to_string());
+        let note1 = Note::new("Title 1".to_string(), "Content 1".to_string()).unwrap();
+        let note2 = Note::new("Title 2".to_string(), "Content 2".to_string()).unwrap();
 
         note_taker.add_note(note1.clone());
         note_taker.add_note(note2.clone());
@@ -108,7 +108,7 @@ mod tests {
     #[test]
     fn test_should_not_allow_duplicate_notes() {
         let mut note_taker = setup_note_taker();
-        let note1 = Note::new("Title 1".to_string(), "Content 1".to_string());
+        let note1 = Note::new("Title 1".to_string(), "Content 1".to_string()).unwrap();
 
         note_taker.add_note(note1.clone());
         note_taker.add_note(note1.clone());
@@ -120,8 +120,8 @@ mod tests {
     #[test]
     fn test_get_specific_note() {
         let mut note_taker = setup_note_taker();
-        let note1 = Note::new("Title 1".to_string(), "Content 1".to_string());
-        let note2 = Note::new("Title 2".to_string(), "Content 2".to_string());
+        let note1 = Note::new("Title 1".to_string(), "Content 1".to_string()).unwrap();
+        let note2 = Note::new("Title 2".to_string(), "Content 2".to_string()).unwrap();
 
         note_taker.add_note(note1.clone());
         note_taker.add_note(note2.clone());
@@ -134,7 +134,7 @@ mod tests {
     #[should_panic(expected = "Index out of bounds")]
     fn test_should_panic_if_getting_out_of_bounds_note() {
         let mut note_taker = setup_note_taker();
-        let note1 = Note::new("Title 1".to_string(), "Content 1".to_string());
+        let note1 = Note::new("Title 1".to_string(), "Content 1".to_string()).unwrap();
 
         note_taker.add_note(note1.clone());
 
@@ -144,8 +144,8 @@ mod tests {
     #[test]
     fn test_notes_should_be_sorted() {
         let mut note_taker = setup_note_taker();
-        let note1 = Note::new("Title 2".to_string(), "Content 2".to_string());
-        let note2 = Note::new("Title 1".to_string(), "Content 1".to_string());
+        let note1 = Note::new("Title 2".to_string(), "Content 2".to_string()).unwrap();
+        let note2 = Note::new("Title 1".to_string(), "Content 1".to_string()).unwrap();
 
         note_taker.add_note(note1.clone());
         note_taker.add_note(note2.clone());
@@ -157,8 +157,8 @@ mod tests {
     #[test]
     fn test_should_return_amount_of_notes() {
         let mut note_taker = setup_note_taker();
-        let note1 = Note::new("Title 1".to_string(), "Content 1".to_string());
-        let note2 = Note::new("Title 2".to_string(), "Content 2".to_string());
+        let note1 = Note::new("Title 1".to_string(), "Content 1".to_string()).unwrap();
+        let note2 = Note::new("Title 2".to_string(), "Content 2".to_string()).unwrap();
 
         note_taker.add_note(note1.clone());
         note_taker.add_note(note2.clone());
@@ -169,8 +169,8 @@ mod tests {
     #[test]
     fn test_should_search_for_note_by_title() {
         let mut note_taker = setup_note_taker();
-        let note1 = Note::new("Title 1".to_string(), "Content 1".to_string());
-        let note2 = Note::new("Title 2".to_string(), "Content 2".to_string());
+        let note1 = Note::new("Title 1".to_string(), "Content 1".to_string()).unwrap();
+        let note2 = Note::new("Title 2".to_string(), "Content 2".to_string()).unwrap();
 
         note_taker.add_note(note1.clone());
         note_taker.add_note(note2.clone());
@@ -184,8 +184,8 @@ mod tests {
     #[test]
     fn test_should_return_empty_vector_when_no_note_found_by_title() {
         let mut note_taker = setup_note_taker();
-        let note1 = Note::new("Title 1".to_string(), "Content 1".to_string());
-        let note2 = Note::new("Title 2".to_string(), "Content 2".to_string());
+        let note1 = Note::new("Title 1".to_string(), "Content 1".to_string()).unwrap();
+        let note2 = Note::new("Title 2".to_string(), "Content 2".to_string()).unwrap();
 
         note_taker.add_note(note1.clone());
         note_taker.add_note(note2.clone());
@@ -198,8 +198,8 @@ mod tests {
     #[test]
     fn test_should_delete_note() {
         let mut note_taker = setup_note_taker();
-        let note1 = Note::new("Title 1".to_string(), "Content 1".to_string());
-        let note2 = Note::new("Title 2".to_string(), "Content 2".to_string());
+        let note1 = Note::new("Title 1".to_string(), "Content 1".to_string()).unwrap();
+        let note2 = Note::new("Title 2".to_string(), "Content 2".to_string()).unwrap();
 
         note_taker.add_note(note1.clone());
         note_taker.add_note(note2.clone());
