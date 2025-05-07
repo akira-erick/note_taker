@@ -40,7 +40,7 @@ impl Note {
         content = content.trim().to_string();
 
         let date_time = NaiveDateTime::parse_from_str(&date_time, "%Y-%m-%d %H:%M")
-            .expect("Failed to parse date time");
+            .map_err(|_| "Invalid date time format")?;
 
         Ok(Note::new_private(title, content, date_time))
     }
