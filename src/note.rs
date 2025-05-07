@@ -62,7 +62,7 @@ impl Note {
     }
 
     pub fn get_date_time(&self) -> String {
-        self.date_time.format("%Y-%m-%d %H:%M").to_string()
+        Self::format_date_time(self.date_time)
     }
 
     pub fn get_as_json(&self) -> String {
@@ -80,6 +80,10 @@ impl Note {
             now.date(),
             NaiveTime::from_hms_opt(now.hour(), now.minute(), 0).unwrap(),
         )
+    }
+
+    fn format_date_time(date_time: NaiveDateTime) -> String {
+        date_time.format("%Y-%m-%d %H:%M").to_string()
     }
 }
 
