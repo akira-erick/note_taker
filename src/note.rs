@@ -144,7 +144,7 @@ mod tests {
     #[test]
     #[should_panic(expected = "Title cannot be empty or blank")]
     fn test_should_panic_if_title_is_empty() {
-        let _ = Note::new("   ".to_string(), "Test Content".to_string()); // This should panic
+        let _ = Note::new("   ".to_string(), "Test Content".to_string()).unwrap(); // This should panic
     }
 
     #[test]
