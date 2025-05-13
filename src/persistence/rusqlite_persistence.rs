@@ -6,6 +6,7 @@ pub struct RusqlitePersistence {
     connection: Connection,
 }
 
+#[allow(dead_code)]
 impl RusqlitePersistence {
     pub fn new(db_name: &str) -> Result<Self> {
         let connection = Connection::open(db_name)?;

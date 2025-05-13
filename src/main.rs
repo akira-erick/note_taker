@@ -4,7 +4,7 @@ mod persistence;
 
 fn main() {
     let mut note_taker = note_taker::NoteTaker::new(Box::new(
-        persistence::rusqlite_persistence::RusqlitePersistence::new("note.db").unwrap(),
+        persistence::postgresql_persistence::PostgresqlPersistence::new().unwrap(),
     ));
 
     note_taker.load().expect("Failed to load notes");

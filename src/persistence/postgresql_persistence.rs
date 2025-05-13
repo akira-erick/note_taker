@@ -6,20 +6,18 @@ use tokio::runtime::Runtime;
 use std::env;
 use tokio_postgres::{Client, Error, NoTls};
 
-#[allow(dead_code)]
 pub struct PostgresqlPersistence {
     connection_string: String,
 }
 
-#[allow(dead_code)]
 impl PostgresqlPersistence {
-    pub fn new() -> Self {
+    pub fn new() -> Result<Self, String> {
         dotenv().ok();
 
         let connection_string =
             env::var("DATABASE_URL").expect("DATABASE_URL must be set in .env file");
 
-        PostgresqlPersistence { connection_string }
+        Ok(PostgresqlPersistence { connection_string })
     }
 
     async fn connect(&self) -> Result<Client, Error> {
