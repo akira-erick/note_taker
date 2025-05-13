@@ -1,4 +1,4 @@
-FROM rust:1.70 as builder
+FROM rust:latest as builder
 
 WORKDIR /usr/src/note_taker
 
@@ -11,11 +11,6 @@ COPY . .
 RUN cargo build --release
 
 FROM debian:bullseye-slim
-
-RUN apt-get update && apt-get install -y \
-    libssl-dev \
-    pkg-config \
-    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /usr/src/note_taker
 

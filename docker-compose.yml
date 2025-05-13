@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  postgres:
+    build:
+      context: ./postgresql  
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: db
+    volumes:
+      - ./postgresql/init.sql:/docker-entrypoint-initdb.d/init.sql  
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+
+  rust-app:
+    build:
+      context: ./rust_app  
+    environment:
+      DATABASE_URL: postgres://user:password@postgres/db  # Use the PostgreSQL service name as host
+    depends_on:
+      - postgres
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
