@@ -30,6 +30,19 @@ impl PostgresqlPersistence {
         });
         Ok(client)
     }
+
+    async fn save_notes(&self, notes: &[Note]) -> Result<(), Error> {
+        let client = self.connect().await?;
+        for note in notes {
+            client
+                .execute(
+                    "INSERT INTO notes (title, content, date_time) VALUES ($1, $2, $3)",
+                    &[&note.get_title(), &note.get_content(), &note.get_date_time()],
+                )
+                .await?;
+        }
+        Ok(())
+    }
 }
 
 impl PersistenceTrait for PostgresqlPersistence {
