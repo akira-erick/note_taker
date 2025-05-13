@@ -10,6 +10,12 @@ RUN cargo build --release
 
 FROM debian:bullseye-slim
 
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    libc6-dev \
+    wget \
+    && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /usr/src/note_taker
 
 COPY --from=builder /usr/src/note_taker/target/release/note_taker .
