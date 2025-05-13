@@ -43,6 +43,24 @@ impl PostgresqlPersistence {
         }
         Ok(())
     }
+
+    async fn load_notes(&self) -> Result<Vec<Note>, Error> {
+        let client = self.connect().await?;
+        let rows = client
+            .query("SELECT title, content, date_time FROM notes", &[])
+            .await?;
+
+        let mut notes = Vec::new();
+        for row in rows {
+            let note = Note::new_with_date_time(
+                row.get(0),
+                row.get(1),
+                row.get(2),
+            ).unwrap();
+            notes.push(note);
+        }
+        Ok(notes)
+    }
 }
 
 impl PersistenceTrait for PostgresqlPersistence {
