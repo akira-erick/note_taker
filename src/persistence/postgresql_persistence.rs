@@ -2,6 +2,7 @@ use super::persistence_trait::PersistenceTrait;
 use crate::note::Note;
 
 use dotenv::dotenv;
+use tokio::runtime::Runtime;
 use std::env;
 use tokio_postgres::{Client, Error, NoTls};
 
@@ -64,13 +65,13 @@ impl PostgresqlPersistence {
 }
 
 impl PersistenceTrait for PostgresqlPersistence {
-    fn save(&self, _notes: &[Note]) -> Result<(), String> {
-        // Implement the save method for PostgreSQL
-        Ok(())
+    fn save(&self, notes: &[Note]) -> Result<(), String> {
+        let runtime = Runtime::new().unwrap();
+        runtime.block_on(self.save_notes(notes)).map_err(|e| e.to_string())
     }
 
     fn load(&self) -> Result<Vec<Note>, String> {
-        // Implement the load method for PostgreSQL
-        Ok(vec![])
+        let runtime = Runtime::new().unwrap();
+        runtime.block_on(self.load_notes()).map_err(|e| e.to_string())
     }
 }
