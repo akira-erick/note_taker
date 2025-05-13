@@ -2,8 +2,8 @@ use super::persistence_trait::PersistenceTrait;
 use crate::note::Note;
 
 use dotenv::dotenv;
-use tokio::runtime::Runtime;
 use std::env;
+use tokio::runtime::Runtime;
 use tokio_postgres::{Client, Error, NoTls};
 
 pub struct PostgresqlPersistence {
@@ -36,7 +36,11 @@ impl PostgresqlPersistence {
             client
                 .execute(
                     "INSERT INTO notes (title, content, date_time) VALUES ($1, $2, $3)",
-                    &[&note.get_title(), &note.get_content(), &note.get_date_time()],
+                    &[
+                        &note.get_title(),
+                        &note.get_content(),
+                        &note.get_date_time(),
+                    ],
                 )
                 .await?;
         }
@@ -51,11 +55,7 @@ impl PostgresqlPersistence {
 
         let mut notes = Vec::new();
         for row in rows {
-            let note = Note::new_with_date_time(
-                row.get(0),
-                row.get(1),
-                row.get(2),
-            ).unwrap();
+            let note = Note::new_with_date_time(row.get(0), row.get(1), row.get(2)).unwrap();
             notes.push(note);
         }
         Ok(notes)
@@ -65,11 +65,15 @@ impl PostgresqlPersistence {
 impl PersistenceTrait for PostgresqlPersistence {
     fn save(&self, notes: &[Note]) -> Result<(), String> {
         let runtime = Runtime::new().unwrap();
-        runtime.block_on(self.save_notes(notes)).map_err(|e| e.to_string())
+        runtime
+            .block_on(self.save_notes(notes))
+            .map_err(|e| e.to_string())
     }
 
     fn load(&self) -> Result<Vec<Note>, String> {
         let runtime = Runtime::new().unwrap();
-        runtime.block_on(self.load_notes()).map_err(|e| e.to_string())
+        runtime
+            .block_on(self.load_notes())
+            .map_err(|e| e.to_string())
     }
 }
