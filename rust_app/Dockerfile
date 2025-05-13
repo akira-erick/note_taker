@@ -4,9 +4,7 @@ WORKDIR /usr/src/note_taker
 
 COPY Cargo.toml Cargo.lock ./
 
-RUN cargo fetch
-
-COPY . .
+COPY ./src ./src
 
 RUN cargo build --release
 
